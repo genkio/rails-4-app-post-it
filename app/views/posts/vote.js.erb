@@ -1,0 +1,2 @@
+$('#post_<%= @post.id %>_votes').html('<%= @post.total_votes %>');
+$('<div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><div id="flash_notice">Your vote was counted</div></div>').insertBefore('div.span12');

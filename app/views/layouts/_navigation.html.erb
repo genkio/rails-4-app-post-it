@@ -1,0 +1,55 @@
+  <ul class="nav">
+    <li>
+      <%= link_to "Postit!", root_path, :class => 'brand' %>
+    </li>
+    <li><a href="<%= posts_path %>">All Posts</a></li>
+      <div class="btn-group nav_item">
+        <button type="button" class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+        <%#= link_to "#", class="btn btn-small dropdown-toggle", "data-toggle" => "dropdown" do %>
+          Categories <span class="caret"></span>
+        <%# end %>
+        </button>
+        <ul class="dropdown-menu">
+          <% Category.all.each do |cat| %>
+            <li><a href="<%= category_path(cat.name) %>"><%= cat.name %></a></li>
+          <% end %>
+          <% if logged_in? %>
+            <li class="divider"></li>
+            <li>
+            <%= link_to(new_category_path) do %>
+              <i class="icon-plus"></i>
+                New Category
+            <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <% if logged_in? %>
+        <div class="nav_item">
+            <a class="btn btn-success btn-small" href="<%= new_post_path %>">New Post</a>
+        </div>
+      <% else %>
+        <div class="nav_item">
+            <a class="btn btn-success btn-small" href="<%= register_path %>">Register</a>
+        </div>
+      <% end %>
+
+    <% if logged_in? %>
+    <div class="btn-group nav_item">
+      <button type="button" class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+        <%= current_user.username %> <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="<%= user_path(current_user.username) %>">View Profile</a></li>
+        <li><a href="<%= edit_user_path(current_user.username) %>">Edit Profile</a></li>
+        <li><a href="<%= logout_path %>">Log Out</a></li>
+      </ul>
+    </div>
+    <% else %>
+    <div class="nav_item">
+      <a class="btn btn-info btn-small" href="<%= login_path %>">Log In</a>
+    </div>
+    <% end %>
+    <li><a href="<%= about_path %>">About Postit</a></li>
+  </ul>

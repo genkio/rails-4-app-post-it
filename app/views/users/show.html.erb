@@ -1,0 +1,67 @@
+<%= render 'shared/title', title: "Profile: #{@user.username}" %>
+<div class="well">
+  <dl class="dl-horizontal">
+  	<dt>Username:</dt>
+  	<dd><%= @user.username %></dd>
+  	<dt>Time Zone:</dt>
+  	<dd><%= @user.time_zone %></dd>
+  	<dt>Two Factor Auth:</dt>
+  	<dd>?</dd>
+  	<dt>Phone:</dt>
+  	<dd>N/A</dd>
+  </dl>
+</div>
+<h5><%= @user.username %>'s Activity</h5>
+<ul class="nav nav-tabs">
+ <li class="active">
+   <a href="#posts" data-toggle="tab">
+     <%= "Posts (#{@user.posts.size})" %>
+   </a>
+ </li>
+ <li>
+   <a href="#comments" data-toggle="tab">
+     <%= "Comments (#{@user.comments.size})" %>
+   </a>
+ </li>
+</ul>
+<div class="tab-content">
+ <div class="tab-pane active" id="posts">
+
+
+ <% @user.posts.each do |post| %>
+   <%= render 'posts/post', post: post%>
+ <% end %>
+
+ </div>
+ <div class="tab-pane" id="comments">
+
+ 
+ <% @user.comments.each do |comment| %>
+  <div class="row">
+   <div class="span0 well text-center">
+     <% if logged_in? %>
+       <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'POST' do %>
+         <i class="icon-arrow-up"></i>
+       <% end %>
+     <% end %>
+     <%= comment.total_votes %>
+     <% if logged_in? %>
+       <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'POST' do %>
+         <i class="icon-arrow-down"></i>
+       <% end %>
+     <% end %>
+   </div>
+
+   <div class="span8 well">
+     <em>"<%= comment.body %>"</em> on <%= link_to comment.post.title, fix_url(comment.post.url) %>
+     <br />
+     <span class="quiet">by </span>
+     <%= link_to comment.user.username, user_path(comment.user.username) %>
+     <small> at <%= format_datetime(comment.created_at) %></small>
+   </div>
+  </div>
+ <% end %>
+
+
+ </div>
+</div>

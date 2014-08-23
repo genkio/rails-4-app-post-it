@@ -1,0 +1,11 @@
+<%= render 'shared/title', title: "New Category" %>
+<div class="well">
+  <%= render 'shared/errors', item:  @category %>
+  <%= form_for @category do |f| %>
+	<div class="control-group">
+	  <%= f.label :name %>
+	  <%= f.text_field :name %>
+	</div>
+  <%= f.submit 'Submit', class: "btn btn-primary" %>
+<% end %>
+</div>
