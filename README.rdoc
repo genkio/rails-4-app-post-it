@@ -2,6 +2,20 @@
 
 http://postitforeveryone.herokuapp.com
 
+== Demonstrating
+
+- Relational database basics
+- Basic database associations: 1:M and M:M
+- ActiveRecord basics
+- Resourceful routing
+- MVC
+- Twitter bootstrap
+- Rails forms
+- Validations
+- Authentication from scratch
+- Simple roles
+- Ajax, the Rails way
+
 == Getting Started
 
 1. Make sure you have rails version 4. Type "rails -v" to make sure.
